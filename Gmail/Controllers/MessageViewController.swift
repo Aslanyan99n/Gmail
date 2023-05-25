@@ -21,6 +21,19 @@ class MessageViewController: UIViewController, UITextFieldDelegate {
         return tableView
     }()
 
+    lazy var newMessageButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.backgroundColor = Color.tabBarLightColor
+        button.layer.cornerRadius = 20
+        let image = UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tintColor = .black
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,7 +51,10 @@ class MessageViewController: UIViewController, UITextFieldDelegate {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationController?.hidesBarsOnSwipe = true
-//        searchFieldBar.delegate = self
+
+        view.addSubview(newMessageButton)
+        newMessageButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
+        newMessageButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120).isActive = true
     }
 }
 
@@ -69,6 +85,10 @@ extension MessageViewController: UITableViewDataSource {
 extension MessageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // go to MessageDetailViewController
+
+        let vc = MessageDetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
+//        present(vc, animated: true)
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

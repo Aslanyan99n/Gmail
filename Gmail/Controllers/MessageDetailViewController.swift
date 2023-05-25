@@ -39,9 +39,16 @@ class MessageDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.rightBarButtonItems = [archiveButton, deleteButton, goToMessageButton, moreButton]
+        view.backgroundColor = .white
+        tabBarController?.tabBar.isHidden = true
+
+        navigationItem.rightBarButtonItems = [moreButton, goToMessageButton, deleteButton, archiveButton]
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     @objc func archiveAction() {
         // Action
     }
